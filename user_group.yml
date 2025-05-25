@@ -1,0 +1,21 @@
+---
+- name: Creating user with thier group
+  hosts: all
+  vars:
+          user_data:
+                  - { name: teraform, group: management }
+                  - { name: linux, group: admin }
+                  - { name: ansible, group: config }
+  tasks:
+          - name: creating group with loop
+            group:
+                    name: "{{ item.group }}"
+                    state: absent
+            loop: "{{ user_data }}"
+          - name: creating user with loop
+            user:
+                    name: "{{ item.name }}"
+                    groups: "{{ item.group }}"
+                    state: absent
+
+            loop: "{{ user_data }}"

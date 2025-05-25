@@ -1,0 +1,18 @@
+---
+  - name:  User creation
+    hosts: all
+    vars:
+             pass_user: 2ix7x6hi
+    tasks:
+            - name: creating user through loop and changing password
+              user:
+                      name: "{{ item }}"
+                      state: present
+                      password: "{{ pass_user | password_hash('sha512') }}"
+              loop:
+                      - decoy
+                      - unmgr007
+                      - ansible
+                      - uadmin
+                      - wintel
+                      - vmware

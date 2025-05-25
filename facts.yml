@@ -1,0 +1,9 @@
+---
+  - name: gathering facts
+    hosts: all
+    vars: 
+       greeting: Hello World!
+    tasks:
+            - debug:
+                    msg: "{{ greeting }}"
+

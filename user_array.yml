@@ -1,0 +1,29 @@
+---
+ - name: User creation though array
+   hosts: all
+   vars_files:
+           - ./vars.yml 
+   tasks:
+          - name: user and group
+            group:
+                    name: "{{ user.Prod.group }}"
+                    state: present
+
+          - name: group
+            group:
+                    name: "{{ user.Test.group }}"
+                    state: absent
+          - user:
+                  name: "{{ user.Prod.name }}"
+                  state: absent
+                  groups: "{{ user.Prod.group }}"
+
+          - user:
+                  name: "{{ user.Test.name }}"
+                  state: absent
+                  groups: "{{ user.Test.group }}"
+
+            register: output
+
+          - debug:
+                  var: output

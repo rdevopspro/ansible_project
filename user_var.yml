@@ -1,0 +1,14 @@
+---
+ - name: User creation
+   hosts: all
+   vars_files:
+          - user_vars.yml
+   tasks:
+          - name: creating user with loop
+            user:
+                    name: "{{ item }}"
+                    state: absent
+
+
+            loop: "{{ my_user }}"
+

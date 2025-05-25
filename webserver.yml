@@ -1,0 +1,23 @@
+---
+ - name: Configuring a webserver
+   hosts: all
+   tasks:
+           - name: Installing apache2 webserver
+             apt:
+                     name: apache2
+                     state: present 
+                      
+           - name: Starting apache2 webserver
+             service:
+                     name: apache2
+                     state: started
+                     enabled: yes
+
+           - name: create index.html
+             lineinfile:
+                     path: /var/www/html/index.html
+                     line: "This is a webserver"
+                     create: yes
+
+          
+

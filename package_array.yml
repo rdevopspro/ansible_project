@@ -1,0 +1,12 @@
+---
+ - name: install packages though array
+   hosts: all
+   tasks:
+           - apt:
+                   
+                name: apache2
+                state: present 
+             register: output
+           - debug:
+                   var: output
+

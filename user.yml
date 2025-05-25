@@ -1,0 +1,29 @@
+---
+ - name: creating user unmgr007
+   hosts: all
+   tasks:
+          - name: create unmgr007 user
+            user:
+                   name: unmgr007
+                   state: present
+                   shell: /sbin/nologin
+
+          - name: create directory
+            file:
+                   path: /automation
+                   state: directory
+                   mode: '777'
+
+          - name: create wheel group
+            group:
+                    name: wheel
+                    state: present
+
+ - name: package installation
+   hosts: all
+   tasks:
+           - name: install apache2 package
+             apt:
+                     name: apache2
+                     state: present
+
