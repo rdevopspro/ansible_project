@@ -1,0 +1,9 @@
+---
+ - name: creating user with array
+   hosts: all
+   vars_files:
+           - ./vars.yml
+   tasks:
+           - name: user and group
+             group:
+                     name: "{
