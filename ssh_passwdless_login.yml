@@ -1,0 +1,39 @@
+- name: Setup ssh keybased authentication
+  hosts: all 
+
+  gather_facts: no
+
+  vars:
+    ssh_pub_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+  tasks:
+
+        - name: Ensure user 'ravirc' exist
+          user:
+             name: ravirc
+             shell: /bin/bash
+             state: present
+             groups: wheel
+             append: yes
+        
+        - name: Create sudoers file for ravirc
+          copy:
+            dest: /etc/sudoers.d/ravirc
+            content: "ravirc ALL=(ALL) NOPASSWD: ALL\n"
+            owner: root
+            group: root
+            mode: '0400'
+
+        - name: Ensure ~/.ssh directory exist
+          file: 
+            path: /home/ravirc/.ssh
+            state: directory
+            mode: '0700'
+            owner: ravirc
+            group: ravirc
+        
+        - name: Copy public key to authorized_keys
+          authorized_key:
+                  user: ravirc
+                  state: present
+                  key: "{{ ssh_pub_key }}"
