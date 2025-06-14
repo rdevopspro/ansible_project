@@ -5,5 +5,5 @@
 192.168.191.12
 
 [admin]
-192.168.191.100 ansible_user=ravirc ansible_password=2ix7x6hi ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+192.168.1.21 ansible_user=ravirc ansible_password=2ix7x6hi ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
